@@ -8,7 +8,6 @@ use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
 
 class CategoryController extends Controller {
-
     public function index() {
         $categories = Category::get();
         return view("admin.category.index", compact("categories"));

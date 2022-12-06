@@ -1,5 +1,5 @@
 @extends("layouts.admin")
-@section("title","Gestion de categoryos")
+@section("title","Gestion de categorias")
 @section("styles")
 @endsection
 @section("options")
@@ -9,19 +9,22 @@
 @section("content")
 <div class="content-wrapper">
     <div class="page-header">
-        <h3 class="page-title">Basic Tables</h3>
+        <h3 class="page-title">Categorias</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                <li class="breadcrumb-item" aria-current="page"></li>
+                <li class="breadcrumb-item"><a href="#">Panel administrador</a></li>
+                <li class="breadcrumb-item" aria-current="page">Categorias</li>
             </ol>
         </nav>
     </div>
     <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card"></div>
-            <div class="card"></div>
-                <div class="card-body"></div>
-                    <h4 class="card-title">Striped Table</h4>
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title">Categorias</h4>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
                     <div class="table-responsive">
                         <table id="order-listing" class="table">
                             <thead>
@@ -29,17 +32,16 @@
                                     <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Descripcion</th>
-                                    <th>Precio</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                 @foreach($categories as $category)
-                                    <tr>
-                                        <th scope="row">{{$category->id}}</th>
-                                        <td>{{$category->name}}</td>
+                                @foreach($categories as $category)
+                                <tr>
+                                    <th scope="row">{{$category->id}}</th>
+                                    <td>
+                                        <a href="{{route("categories.show",$category)}}">{{$category->name}}</a></td>
                                         <td>{{$category->description}}</td>
-                                        <td>{{$category->price}}</td>
                                         <td style="width: 50px">
                                             {!! Form::open(["route"=>["categories.destroy",$category],"method"=>"DELETE"]) !!}
                                             <a class="jsgrid-button jsgrid-edit-button" href="{{route("categories.edit",$category)}}" title="Editar">
@@ -48,6 +50,7 @@
                                             <a class="jsgrid-button js-grid-delete-button" href="{{route("categories.destroy",$category)}}" title="Eliminar">
                                                 <i class="far fa-trahs-alt"></i>
                                             </a>
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach

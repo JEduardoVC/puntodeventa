@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer("stock");
             $table->string("image");
             $table->decimal("sell_price",12,2);
-            $table->enum("status",["ACTIVE","DESACTIVATED"])->default("ACTIVATE");
-// Llaves foraneas
+            $table->enum("status",["ACTIVE","DEACTIVATED"])->default("ACTIVE");
+            // Llaves foraneas
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedBigInteger('provider_id');

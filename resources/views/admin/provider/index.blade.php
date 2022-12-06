@@ -29,7 +29,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <h4 class="card-title">Categorías</h4>
+                                <h4 class="card-title">Proveedores</h4>
                                 <div class="btn-group">
                                     <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v"></i>
@@ -59,14 +59,12 @@
                                                 <td>{{ $provider->phone }}</td>
                                                 <td style="width: 50px">
                                                     {!! Form::open(['route' => ['providers.destroy', $provider], 'method' => 'DELETE']) !!}
-                                                    <a class="jsgrid-button jsgrid-edit-button"
-                                                        href="{{ route('providers.edit', $provider) }}" title="Editar">
-                                                        <i class="far fa-edit"></i>
-                                                    </a>
-                                                    <a class="jsgrid-button js-grid-delete-button" title="Eliminar"
-                                                        type="submit">
-                                                        <i class="far fa-trahs-alt"></i>
-                                                    </a>
+                                                        <a class="jsgrid-button jsgrid-edit-button unstyled-button" type="button" href="{{route('providers.edit', $provider)}}" title="Actualizar">
+                                                            <i class="far fa-edit"></i>
+                                                        </a>
+                                                        <button class="jsgrid-button js-grid-delete-button unstyled-button" title="Eliminar" type="submit">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </button>
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>

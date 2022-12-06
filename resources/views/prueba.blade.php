@@ -46,7 +46,7 @@
                                             <i class="far fa-edit"></i>
                                         </a>
                                         <a class="jsgrid-button js-grid-delete-button" href="{{route("categories.destroy",$category)}}" title="Eliminar">
-                                            <i class="far fa-trahs-alt"></i>
+                                            <i class="far fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>

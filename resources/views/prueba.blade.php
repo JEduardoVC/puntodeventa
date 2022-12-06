@@ -34,17 +34,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach($products as $product)
-                                    <tr>
-                                        <th scope="row">{{$product->id}}</th>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->description}}</td>
-                                        <td>{{$product->price}}</td>
-                                        <td style="width: 50px">
-                                            {!! Form::open(["route"=>{"products.destroy"}]) !!}
-                                        </td>
-                                    </tr>
-                                @endforeach --}}
+                                {{--@foreach($categories as $category)
+                                <tr>
+                                    <th scope="row">{{$category->id}}</th>
+                                    <td>{{$category->name}}</td>
+                                    <td>{{$category->description}}</td>
+                                    <td>{{$category->price}}</td>
+                                    <td style="width: 50px">
+                                        {!! Form::open(["route"=>["categories.destroy",$category],"method"=>"DELETE"]) !!}
+                                        <a class="jsgrid-button jsgrid-edit-button" href="{{route("categories.edit",$category)}}" title="Editar">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        <a class="jsgrid-button js-grid-delete-button" href="{{route("categories.destroy",$category)}}" title="Eliminar">
+                                            <i class="far fa-trahs-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach--}}
                             </tbody>
                         </table>
                     </div>

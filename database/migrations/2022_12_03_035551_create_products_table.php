@@ -8,9 +8,9 @@ return new class extends Migration{
     public function up(){
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->unique();
+            $table->string("name")->unique()->nullable();
             $table->string("code")->unique();
-            $table->integer("stock");
+            $table->integer("stock")->default(0);
             $table->string("image");
             $table->decimal("sell_price",12,2);
             $table->enum("status",["ACTIVE","DEACTIVATED"])->default("ACTIVE");

@@ -11,7 +11,7 @@
 @endsection
 @section("create")
 <li class="nav-item-d-none d-lg-flex">
-    <a class="nav-link" href="{{route("categories.create")}}">
+    <a class="nav-link" href="{{route("products.create")}}">
         <span class="btn btn-primary">+ Crear nuevo</span>
     </a>
 </li>
@@ -50,7 +50,7 @@
                                 <i class="fas fa-ellipsis-v"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="{{route("categories.create")}}" class="dropdown-item">Agregar</a>
+                                <a href="{{route("products.create")}}" class="dropdown-item">Agregar</a>
                             </div>
                         </div>
                     </div>
@@ -60,22 +60,26 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Nombre</th>
-                                    <th>Descripcion</th>
+                                    <th>Cantidad</th>
+                                    <th>Estado</th>
+                                    <th>Categoria</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($products as $category)
+                                @foreach($products as $product)
                                 <tr>
-                                    <th scope="row">{{$category->id}}</th>
+                                    <th scope="row">{{$product->id}}</th>
                                     <td>
-                                        <a href="{{route("categories.show",$category)}}">{{$category->name}}</a></td>
-                                        <td>{{$category->description}}</td>
+                                        <a href="{{route("products.show",$product)}}">{{$product->name}}</a></td>
+                                        <td>{{$product->stock}}</td>
+                                        <td>{{$product->status}}</td>
+                                        <td>{{$product->category_id}}</td>
                                         <td style="width: 50px">
-                                            {!! Form::open(["route"=>["categories.destroy",$category],"method"=>"DELETE"]) !!}
-                                            <button class="jsgrid-button jsgrid-edit-button unstyled-button" type="button" href="{{route("categories.edit",$category)}}" title="Editar">
+                                            {!! Form::open(["route"=>["products.destroy",$product],"method"=>"DELETE"]) !!}
+                                            <a class="jsgrid-button jsgrid-edit-button unstyled-button" type="button" href="{{route("products.edit",$product)}}" title="Editar">
                                                 <i class="far fa-edit"></i>
-                                            </button>
+                                            </a>
                                             <button class="jsgrid-button js-grid-delete-button unstyled-button" title="Eliminar">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>

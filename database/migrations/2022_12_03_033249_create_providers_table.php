@@ -13,7 +13,7 @@ return new class extends Migration{
             $table->string("ruc_name");
             $table->string("address")->nullable();
             $table->string("phone");
-            $table->string("timestamps");
+            $table->timestamps();
         });
     }
     public function down(){

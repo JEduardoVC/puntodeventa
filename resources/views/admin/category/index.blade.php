@@ -1,6 +1,20 @@
 @extends("layouts.admin")
 @section("title","Gestion de categorias")
 @section("styles")
+<style type="text/css">
+    .unstyled-button{
+        border: none;
+        padding: 0;
+        background-color: none
+    }
+</style>
+@endsection
+@section("create")
+<li class="nav-item-d-none d-lg-flex">
+    <a class="nav-link" href="{{route("categories.create")}}">
+        <span class="btn btn-primary">+ Crear nuevo</span>
+    </a>
+</li>
 @endsection
 @section("options")
 @endsection
@@ -23,7 +37,22 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title">Categorias</h4>
-                        <i class="fas fa-ellipsis-v"></i>
+                        {{-- <div class="btn-group">
+                            <h4 class="card-title">
+                                <a href="#">
+                                    <i class="fas fa-download"></i>
+                                    Exportar
+                                </a>
+                            </h4>
+                        </div> --}}
+                        <div class="btn-group">
+                            <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="{{route("categories.create")}}" class="dropdown-item">Agregar</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table id="order-listing" class="table">
@@ -44,12 +73,12 @@
                                         <td>{{$category->description}}</td>
                                         <td style="width: 50px">
                                             {!! Form::open(["route"=>["categories.destroy",$category],"method"=>"DELETE"]) !!}
-                                            <a class="jsgrid-button jsgrid-edit-button" href="{{route("categories.edit",$category)}}" title="Editar">
+                                            <button class="jsgrid-button jsgrid-edit-button unstyled-button" type="button" href="{{route("categories.edit",$category)}}" title="Editar">
                                                 <i class="far fa-edit"></i>
-                                            </a>
-                                            <a class="jsgrid-button js-grid-delete-button" href="{{route("categories.destroy",$category)}}" title="Eliminar">
-                                                <i class="far fa-trahs-alt"></i>
-                                            </a>
+                                            </button>
+                                            <button class="jsgrid-button js-grid-delete-button unstyled-button" title="Eliminar">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>

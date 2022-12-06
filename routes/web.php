@@ -13,7 +13,7 @@ Route::resource("clients",ClientController::class)->names("clients");
 Route::resource("products",ProductController::class)->names("products");
 Route::resource("providers",ProviderController::class)->names("providers");
 Route::resource("purchases",PurchaseController::class)->names("purchases");
-Route::resource("sales",SaleController::class)->names("sales");*/
+Route::resource("sales",SaleController::class)->names("sales");
 
 Route::get("/prueba",function() {
     return view("prueba");

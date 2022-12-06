@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProviderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +21,10 @@ Route::get('/', function () {
 Route::resource("categories","CategoryController")->names("categories");
 Route::resource("clients","ClientController")->names("clients");
 Route::resource("products","ProductController")->names("products");
-Route::resource("providers","ProviderController")->names("providers");
+Route::resource("providers",ProviderController::class)->names("providers");
 Route::resource("purchases","PurchaseController")->names("purchases");
 Route::resource("sales","SaleController")->names("sales");
 
-Route::get("/prueba",function(){
+Route::get("/prueba",function() {
     return view("prueba");
 });

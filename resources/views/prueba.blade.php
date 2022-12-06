@@ -18,9 +18,9 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card"></div>
-            <div class="card"></div>
-                <div class="card-body"></div>
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
                     <h4 class="card-title">Striped Table</h4>
                     <div class="table-responsive">
                         <table id="order-listing" class="table">

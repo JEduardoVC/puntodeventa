@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProviderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
 
 Route::get('/', function () {
     return view('welcome');

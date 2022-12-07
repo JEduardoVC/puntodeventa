@@ -12,7 +12,7 @@ return new class extends Migration{
             $table->decimal("tax");
             $table->decimal("total");
             $table->enum("status",["VALID","CANCELED"])->default("VALID");
-            $table->string("picture");
+            $table->string("picture")->nullable();
 
             // Llaves foraneas
             $table->unsignedBigInteger('user_id');

@@ -3,8 +3,8 @@
     <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" required>
 </div>
 <div class="form-group">
-    <label for="precio">Precio de venta </label>
-    <input type="number" name="precio" id="precio" class="form-control" placeholder="Precio de venta" required>
+    <label for="sell_price">Precio de venta </label>
+    <input type="number" name="sell_price" id="sell_price" class="form-control" placeholder="Precio de venta" required>
 </div>
 <div class="form-group">
     <label for="category_id">Categoria</label>
@@ -22,7 +22,9 @@
         @endforeach
     </select>
 </div>
-<div class="custom-file mb-4">
-    <input type="file" name="image" id="image" class="custom-file-input">
-    <label class="custom-file-label" for="image">Seleccionar archivos</label>
+<div class="row">
+    <div class="card-body">
+        <h6 class="card-title d-flex">Imagen del producto</h6>
+        <input type="file" name="picture" id="picture" class="dropify">
+    </div>
 </div>

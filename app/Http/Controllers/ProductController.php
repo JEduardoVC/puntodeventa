@@ -28,9 +28,9 @@ class ProductController extends Controller {
         $product = Product::create($request->all()+[
             "image"=>$image_name
         ]);
-        $product->update(["code"=>$product->id."_".$product->name]);
+        $product->update(["code"=>$product->id]);
         return redirect()->route("products.index");
-    }
+        return redirect()->route("admin.product.edit");    }
     public function show(Product $product) {
         return view("admin.product.show", compact("product"));
     }

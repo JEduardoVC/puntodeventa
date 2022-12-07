@@ -13,10 +13,10 @@ class StoreRequest extends FormRequest {
         return [
             'name'=>'string|required|max:255',
             'dni'=>'string|required|min:8|max:8|unique:clients',
-            'ruc'=>'string|required|min:11|max:11|unique:clients',
-            'address'=>'string|required|max:255|',
+            'ruc'=>'string|min:11|max:11|unique:clients',
+            'address'=>'string|max:255|',
             'phone'=>'string|required|min:10|max:10|unique:clients',
-            'email'=>'string|email:rfc,dns|required|max:255|unique:clients',
+            'email'=>'string|email:rfc,dns|max:255|unique:clients',
         ];
     }
 
@@ -33,13 +33,11 @@ class StoreRequest extends FormRequest {
             'dni.min'=>'Se requiere de minimo 8 caracteres',
 
             'ruc.string'=>'El valor no es correcto',
-            'ruc.required'=>'Este campo es requerido',
             'ruc.max'=>'Solo se permite 11 caracteres',
             'ruc.unique'=>'Ya se tiene registrado',
             'ruc.min'=>'Se requiere de minimo 11 caracteres',
 
             'address.string'=>'El valor no es correcto',
-            'address.required'=>'Este campo es requerido',
             'address.max'=>'Solo se permite 255 caracteres',
 
             'phone.string'=>'El valor no es correcto',
@@ -49,7 +47,6 @@ class StoreRequest extends FormRequest {
             'phone.min'=>'Se requiere de minimo 10 caracteres',
 
             'email.string'=>'El valor no es correcto',
-            'email.required'=>'Este campo es requerido',
             'email.max'=>'Solo se permite 250 caracteres',
             'email.unique'=>'Ya se tiene registrado',
             'email.email'=>'No es un correo electronico',

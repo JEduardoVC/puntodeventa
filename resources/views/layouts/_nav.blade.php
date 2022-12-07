@@ -35,9 +35,10 @@
         </a>
         <div class="collapse" id="page-layouts">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="pages/layout/boxed-layout.html">Boxed</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/layout/rtl-layout.html">RTL</a></li>
-            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="pages/layout/horizontal-menu.html">Horizontal Menu</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("categories.index")}}">Categorias</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("providers.index")}}">Proveedores</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("products.index")}}">Productos</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("clients.index")}}">Clientes</a></li>
           </ul>
         </div>
       </li>

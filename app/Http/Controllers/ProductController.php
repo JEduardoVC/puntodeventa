@@ -14,11 +14,13 @@ class ProductController extends Controller {
         $products = Product::get();
         return view("admin.product.index", compact("products"));
     }
+
     public function create() {
         $categories = Category::get();
         $providers = Provider::get();
         return view("admin.product.create", compact("categories", "providers"));
     }
+
     public function store(StoreRequest $request) {
         if($request->hasFile("image")){
             $file = $request->file("image");
@@ -30,7 +32,7 @@ class ProductController extends Controller {
         ]);
         $product->update(["code"=>$product->id]);
         return redirect()->route("products.index");
-        return redirect()->route("admin.product.edit");    }
+    }
     public function show(Product $product) {
         return view("admin.product.show", compact("product"));
     }

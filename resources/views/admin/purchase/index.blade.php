@@ -1,5 +1,5 @@
 @extends("layouts.admin")
-@section("title","Gestion de categorias")
+@section("title","Gestion de compras")
 @section("styles")
 <style type="text/css">
     .unstyled-button{
@@ -11,7 +11,7 @@
 @endsection
 @section("create")
 <li class="nav-item-d-none d-lg-flex">
-    <a class="nav-link" href="{{route("products.create")}}">
+    <a class="nav-link" href="{{route("purchases.create")}}">
         <span class="btn btn-primary">+ Crear nuevo</span>
     </a>
 </li>
@@ -23,11 +23,11 @@
 @section("content")
 <div class="content-wrapper">
     <div class="page-header">
-        <h3 class="page-title">Productos</h3>
+        <h3 class="page-title">Compras</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Panel administrador</a></li>
-                <li class="breadcrumb-item" aria-current="page">Productos</li>
+                <li class="breadcrumb-item" aria-current="page">Compras</li>
             </ol>
         </nav>
     </div>
@@ -36,7 +36,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Productos</h4>
+                        <h4 class="card-title">Compras</h4>
                         {{-- <div class="btn-group">
                             <h4 class="card-title">
                                 <a href="#">
@@ -50,7 +50,7 @@
                                 <i class="fas fa-ellipsis-v"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="{{route("products.create")}}" class="dropdown-item">Agregar</a>
+                                <a href="{{route("purchases.create")}}" class="dropdown-item">Agregar</a>
                             </div>
                         </div>
                     </div>
@@ -59,31 +59,30 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Cantidad</th>
+                                    <th>Fecha</th>
+                                    <th>Total</th>
                                     <th>Estado</th>
-                                    <th>Categoria</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($products as $product)
+                                @foreach($purchases as $purchase)
                                 <tr>
-                                    <th scope="row">{{$product->id}}</th>
-                                    <td><a href="{{route("products.show",$product)}}">{{$product->name}}</a></td>
-                                        <td>{{$product->stock}}</td>
-                                        <td>{{$product->status}}</td>
-                                        <td>{{$product->category->name}}</td>
-                                        <td style="width: 50px">
-                                            {!! Form::open(["route"=>["products.destroy",$product],"method"=>"DELETE"]) !!}
-                                            <a class="jsgrid-button jsgrid-edit-button unstyled-button" type="button" href="{{route("products.edit",$product)}}" title="Editar">
+                                    <th scope="row"><a href="{{route("purchases.show",$purchase)}}"> {{$purchase->id}}</a></th>
+                                    <td>{{$purchase->purchase_date}}</td>
+                                    <td>{{$purchase->total}}</td>
+                                    <td>{{$purchase->status}}</td>
+                                    <td style="width: 50px">
+                                            {{-- <a class="jsgrid-button jsgrid-edit-button unstyled-button" type="button" href="{{route("purchases.edit",$purchase)}}" title="Editar">
                                                 <i class="far fa-edit"></i>
-                                            </a>
-                                            <button class="jsgrid-button js-grid-delete-button unstyled-button" title="Eliminar">
+                                            </a> --}}
+                                            {{-- <button class="jsgrid-button js-grid-delete-button unstyled-button" title="Eliminar">
                                                 <i class="far fa-trash-alt"></i>
-                                            </button>
-                                            {!! Form::close() !!}
-                                        </td>
+                                            </button> --}}
+                                            <a class="jsgrid-button js-grid-delete-button unstyled-button" title="Generar PDF"><i class="far fa-file-pdf"></i></a>
+                                            <a class="jsgrid-button js-grid-delete-button unstyled-button" title="Imprimir"><i class="fas fa-print"></i></a>
+                                            <a href="{{route("purchases.show",$purchase)}}" class="jsgrid-button js-grid-delete-button unstyled-button" title="Ver detalles"><i class="far fa-eye"></i></a>
+                                    </td>
                                     </tr>
                                 @endforeach
                             </tbody>

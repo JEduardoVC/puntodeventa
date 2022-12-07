@@ -14,11 +14,13 @@ class ProductController extends Controller {
         $products = Product::get();
         return view("admin.product.index", compact("products"));
     }
+
     public function create() {
         $categories = Category::get();
         $providers = Provider::get();
         return view("admin.product.create", compact("categories", "providers"));
     }
+
     public function store(StoreRequest $request) {
         if($request->hasFile("picture")){
             $file = $request->file("picture");

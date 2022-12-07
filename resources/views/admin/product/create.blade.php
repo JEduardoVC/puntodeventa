@@ -50,9 +50,11 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="custom-file mb-4">
-                            <input type="file" name="image" id="image" class="custom-file-input">
-                            <label class="custom-file-label" for="image">Seleccionar archivos</label>
+                        <div class="row">
+                            <div class="card-body">
+                                <h6 class="card-title d-flex">Imagen del producto</h6>
+                                <input type="file" name="picture" id="picture" class="dropify">
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary mr-2">Registrar</button>
                         <a href="{{route("products.index")}}" class="btn btn-light">Cancelar</a>
@@ -64,5 +66,5 @@
 </div>
 @endsection
 @section("scripts")
-{!! Html::script("melody/js/data-table.js") !!}
+{!! Html::script("melody/js/dropify.js") !!}
 @endsection

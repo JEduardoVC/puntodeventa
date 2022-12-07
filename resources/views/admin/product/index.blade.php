@@ -74,7 +74,7 @@
                                         <a href="{{route("products.show",$product)}}">{{$product->name}}</a></td>
                                         <td>{{$product->stock}}</td>
                                         <td>{{$product->status}}</td>
-                                        <td>{{$product->category_id}}</td>
+                                        <td>{{$product->category->name}}</td>
                                         <td style="width: 50px">
                                             {!! Form::open(["route"=>["products.destroy",$product],"method"=>"DELETE"]) !!}
                                             <a class="jsgrid-button jsgrid-edit-button unstyled-button" type="button" href="{{route("products.edit",$product)}}" title="Editar">

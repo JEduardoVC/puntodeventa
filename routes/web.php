@@ -37,3 +37,5 @@ Route::resource("products",ProductController::class)->names("products");
 Route::resource("providers",ProviderController::class)->names("providers");
 Route::resource("purchases",PurchaseController::class)->names("purchases");
 Route::resource("sales",SaleController::class)->names("sales");
+
+Route::get("purchases/pdf/{purchase}",[PurchaseController::class,"pdf"])->name("purchases.pdf");

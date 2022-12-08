@@ -10,6 +10,7 @@ use App\Http\Requests\Purchase\UpdateRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 class PurchaseController extends Controller{
     public function __construct(){
@@ -66,4 +67,20 @@ class PurchaseController extends Controller{
         $pdf = Pdf::loadView("admin.purchase.pdf",compact("purchase","subtotal","purchaseDetails"));
         return $pdf->download('Reporte_de_compra_'.$purchase->id.'.pdf');
     }
+    public function upload(Request $request, Purchase $purchase) {
+        //$purchase->update($request->all());
+        //return redirect()->route("purchases.index");
+    }
+    public function change_status(Purchase $purchase) {
+        if($purchase->status == "VALID"){
+            $purchase->update(["status"=>"CANCELED"]);
+            return redirect()->back();
+        } else {
+            $purchase->update(["status"=>"VALID"]);
+            return redirect()->back();
+        }
+    }
+
+
+
 }

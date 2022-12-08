@@ -41,14 +41,17 @@ class ProductController extends Controller {
         $product->update(["code"=>$product->id]);
         return redirect()->route("products.index");
     }
+
     public function show(Product $product) {
         return view("admin.product.show", compact("product"));
     }
+
     public function edit(Product $product) {
         $categories = Category::get();
         $providers = Provider::get();
         return view("admin.product.edit", compact("product", "categories", "providers"));
     }
+
     public function update(UpdateRequest $request, Product $product) {
         if($request->hasFile("picture")){
             $file = $request->file("picture");
@@ -60,10 +63,12 @@ class ProductController extends Controller {
         ]);
         return redirect()->route("products.index");
     }
+
     public function destroy(Product $product) {
         $product->delete();
         return redirect()->route("products.index");
     }
+
     public function change_status(Product $product) {
         if($product->status == "ACTIVE"){
             $product->update(["status"=>"DEACTIVATED"]);
@@ -71,6 +76,20 @@ class ProductController extends Controller {
         } else {
             $product->update(["status"=>"ACTIVE"]);
             return redirect()->back();
+        }
+    }
+
+    public function get_products_by_barcode(Request $request) {
+        if($request->ajax()) {
+            $products = Product::where("code", $request->code)->firstOrFail();
+            return response()->json($products);
+        }
+    }
+
+    public function get_products_by_id(Request $request) {
+        if($request->ajax()) {
+            $products = Product::findOrFail($request->product_id);
+            return response()->json($products);
         }
     }
 }

@@ -69,17 +69,19 @@
                                 <tr>
                                     <td>{{$sale->sale_date}}</td>
                                     <td>{{$sale->total}}</td>
-                                    <td>{{$sale->status}}</td>
+                                    @if($sale->status == "VALID")
+                                        <td>
+                                            <a class="jsgrid-button btn btn-success" href="{{route("change.status.sales", $sale)}}">{{$sale->status}} <i class="fas fa-check"></i></a>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <a class="jsgrid-button btn btn-danger" href="{{route("change.status.sales", $sale)}}">{{$sale->status}} <i class="fas fa-times"></i></a>
+                                        </td>
+                                    @endif
                                     <td style="width: 50px">
-                                            {{-- <a class="jsgrid-button jsgrid-edit-button unstyled-button" type="button" href="{{route("sales.edit",$sale)}}" title="Editar">
-                                                <i class="far fa-edit"></i>
-                                            </a> --}}
-                                            {{-- <button class="jsgrid-button js-grid-delete-button unstyled-button" title="Eliminar">
-                                                <i class="far fa-trash-alt"></i>
-                                            </button> --}}
-                                            <a href="{{route("sales.pdf", $sale)}}" class="jsgrid-button js-grid-delete-button unstyled-button" title="Generar PDF"><i class="far fa-file-pdf"></i></a>
-                                            <a class="jsgrid-button js-grid-delete-button unstyled-button" title="Imprimir"><i class="fas fa-print"></i></a>
-                                            <a href="{{route("sales.show",$sale)}}" class="jsgrid-button js-grid-delete-button unstyled-button" title="Ver detalles"><i class="far fa-eye"></i></a>
+                                        <a href="{{route("sales.pdf", $sale)}}" class="jsgrid-button js-grid-delete-button unstyled-button" title="Generar PDF"><i class="far fa-file-pdf"></i></a>
+                                        <a class="jsgrid-button js-grid-delete-button unstyled-button" title="Imprimir"><i class="fas fa-print"></i></a>
+                                        <a href="{{route("sales.show",$sale)}}" class="jsgrid-button js-grid-delete-button unstyled-button" title="Ver detalles"><i class="far fa-eye"></i></a>
                                     </td>
                                     </tr>
                                 @endforeach

@@ -58,7 +58,10 @@
                 Settings
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item">
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="dropdown-item">
+                Logout
+              </form>
+              <a class="dropdown-item" href="{{route("logout")}}">
                 <i class="fas fa-power-off text-primary"></i>
                 Logout
               </a>

@@ -71,4 +71,14 @@ class SaleController extends Controller{
             return redirect()->back();
         }
     }
+    public function pdf(Sale $sale)
+    {
+        $subtotal = 0 ;
+        $saleDetails = $sale->saleDetails;
+        foreach ($saleDetails as $saleDetail) {
+            $subtotal += $saleDetail->quantity*$saleDetail->price-$saleDetail->quantity* $saleDetail->price*$saleDetail->discount/100;
+        }
+        $pdf = PDF::loadView('admin.sale.pdf', compact('sale', 'subtotal', 'saleDetails'));
+        return $pdf->download('Reporte_de_venta_'.$sale->id.'.pdf');
+    }
 }

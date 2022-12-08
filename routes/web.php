@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 
@@ -27,11 +27,9 @@ Route::middleware('auth')->group(function () {
 //require __DIR__.'/auth.php';
 
 Auth::routes();
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, "index"])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::resource("categories",CategoryController::class)->names("categories");
@@ -48,13 +46,16 @@ Route::get("sales/pdf/{sale}",[SaleController::class,"pdf"])->name("sales.pdf");
 
 Route::get("purchases/upload/{purchase}", [PurchaseController::class,"upload"])->name("upload.purchases");
 
-Route::get("change_status/products/{producs}",[ProductController::class],"change_status")->name("change_status");
-Route::get("change_status/purchases/{purchase}",[PurchaseController::class],"change_status")->name("change_status");
-Route::get("change_status/sales/{sale}",[SaleController::class],"change_status")->name("change_status");
+Route::get("change_status/products/{product}",[ProductController::class,"change_status"])->name("change.status.products");
+Route::get("change_status/purchases/{purchase}",[PurchaseController::class,"change_status"])->name("change.status.purchases");
+Route::get("change_status/sales/{sale}",[SaleController::class,"change_status"])->name("change.status.sales");
 
-Route::get("sales/reports_day",[SaleController::class],"reports_day")->name("reports.day");
-Route::get("sales/reports_date",[SaleController::class],"reports_date")->name("reports.date");
+Route::get("get_products_by_barcode",[ProductController::class,"get_products_by_barcode"])->name("get_products_by_barcode");
+Route::get("get_products_by_id",[ProductController::class,"get_products_by_id"])->name("get_products_by_id");
 
-Route::post("sales/reports_day",[SaleController::class],"report_results")->name("report.results");
+Route::get("sales/reports_day",[SaleController::class,"reports_day"])->name("reports.day");
+Route::get("sales/reports_date",[SaleController::class,"reports_date"])->name("reports.date");
+
+Route::post("sales/reports_day",[SaleController::class,"report_results"])->name("report.results");
 
 Route::get("/home",[HomeController::class,"index"])->name("home");

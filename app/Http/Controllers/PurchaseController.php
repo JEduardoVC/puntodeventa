@@ -14,7 +14,16 @@ use Illuminate\Http\Request;
 
 class PurchaseController extends Controller{
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware("auth");
+
+        $this->middleware("can:purchases.create")->only(["create","store"]);
+        $this->middleware("can:purchases.index")->only(["index"]);
+        $this->middleware("can:purchases.edit")->only(["edit","update"]);
+        $this->middleware("can:purchases.show")->only(["show"]);
+        $this->middleware("can:purchases.destroy")->only(["destroy"]);
+        $this->middleware("can:purchases.upload")->only(["upload"]);
+        $this->middleware("can:purchases.pdf")->only(["pdf"]);
+        $this->middleware("can:change.status.purchases")->only(["change_status"]);
     }
     public function index() {
         $purchases = Purchase::get();
@@ -44,19 +53,6 @@ class PurchaseController extends Controller{
         }
         return view("admin.purchase.show", compact("purchase","purchaseDetails","subtotal"));
     }
-    public function edit(Purchase $purchase) {
-        $providers = Provider::get();
-        $products = Product::get();
-        return view("admin.purchase.edit", compact("purchase", "providers", "products"));
-    }
-    public function update(UpdateRequest $request, Purchase $purchase) {
-        //$purchase->update($request->all());
-        //return redirect()->route("purchases.index");
-    }
-    public function destroy(Purchase $purchase) {
-        //$purchase->delete();
-        //return redirect()->route("purchases.index");
-    }
     public function pdf(Purchase $purchase){
         $subtotal = 0;
         $purchaseDetails = $purchase->purchaseDetails;
@@ -80,7 +76,4 @@ class PurchaseController extends Controller{
             return redirect()->back();
         }
     }
-
-
-
 }

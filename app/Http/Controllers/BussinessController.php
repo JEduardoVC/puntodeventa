@@ -8,6 +8,14 @@ use App\Http\Requests\Bussiness\UpdateRequest;
 
 class BussinessController extends Controller
 {
+    public function __construct(){
+        $this->middleware("auth");
+
+        $this->middleware("can:bussinesses.index")->only(["index"]);
+        $this->middleware("can:bussinesses.edit")->only(["update"]);
+
+    }
+
     public function index() {
         $bussinesses = Bussiness::where("id",1)->firstOrFail();
         return view("admin.bussiness.index", compact("bussinesses"));

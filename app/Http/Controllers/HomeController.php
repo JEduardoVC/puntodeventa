@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index() {
         $comprasMes=DB::select("SELECT monthname(c.purchase_date) as mes, sum(c.total) as totalmes from purchases c where c.status='VALID' group by monthname(c.purchase_date) order by monthname(c.purchase_date) desc limit 12;");
 
-        $ventasMes=DB::select("SELECT monthname(v.sale_date) as mes, sum(v.total) as totalmes from sales v where v.status='VALID' group by monthname(v.sale_date) order by monthname(v.sale_date) desc limit 12;");
+        $ventasMes=DB::select("SELECT monthname(v.sale_date) as mes, sum(v.total) as totalmes, month(v.sale_date) as mes_numero, year(v.sale_date) from sales v where v.status='VALID' group by monthname(v.sale_date),month(v.sale_date), year(v.sale_date) order by year(v.sale_date), month(v.sale_date) asc limit 12");
 
         $ventasDia=DB::select("SELECT DATE_FORMAT(v.sale_date,'%d/%m/%Y') as dia, sum(v.total) as totaldia from sales v where v.status='VALID' group by DATE_FORMAT(v.sale_date,'%d/%m/%Y') desc limit 12");
 

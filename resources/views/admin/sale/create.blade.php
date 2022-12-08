@@ -44,6 +44,10 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="code">Código de Barras: </label>
+                        <input type="number" name="code" id="code" class="form-control" placeholder="" required>
+                    </div>
+                    <div class="form-group">
                         <label for="tax">Ganancia: </label>
                         <input type="number" name="tax" id="tax" class="form-control" placeholder="Impuesto al %18" required>
                     </div>
@@ -144,6 +148,42 @@ function mostrarValores() {
     $("#stock").val(datos[1]);
 }
 
+var product_id = $('#product_id')
+product_id.change(function() {
+    $.ajax({
+        url: "{{route('get_products_by_id')}}",
+        method: 'GET',
+        data: {
+            product_id: product_id.val(),
+        },
+        success: function(data) {
+            $("#price").val(data.sell_price);
+            $("#stock").val(data.stock);
+            $("#code").val(data.code);
+        }
+    });
+});
+
+$(obtener_registro());
+function obtener_registro(code) {
+    $.ajax({
+        url:"{{route('get_products_by_barcode')}}",
+        type: "GET",
+        data: {
+            code: code
+        },
+        success: function(data) {
+            $("#price").val(data.sell_price);
+            $("#stock").val(data.stock);
+        },
+    })
+}
+$(document).on("keyup", "#code", function() {
+    var valorResultado = $(this).val();
+    if(valorResultado != "") obtener_registro(valorResultado);
+    else obtener_registro();
+})
+
 function agregar(){
     datos = document.getElementById("product_id").value.split("_");
     product_id = datos[0];
@@ -161,21 +201,14 @@ function agregar(){
             subtotal[cont] = quantity*price;
             total = total + subtotal[cont];
         }
-        var fila = '<tr class="selected" id="fila' + cont +'">' +
-                        '<td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar(' + cont + ');"> ' + '<i class="fa fa-times fa-2x"></i></button></td>' +
-                        '<td><input type="hidden" name="product_id[]" value="' + product_id + '">' + producto + '</td>' +
-                        '<td> <input type="hidden" name="price[]" value="' + parseFloat(price).toFixed(2) + '"> <input class="form-control" type="number" value="' + parseFloat(price).toFixed(2) + '" disabled> </td> '+
-                        '<td> <input type="hidden" name="discount[]" value="' + parseFloat(discount) + '"> <input class="form-control" type="number" value="' + parseFloat(discount) + '" disabled> </td>' +
-                        '<td> <input type="hidden" name="quantity[]" value="' + quantity +'"> <input type="number" value="' + quantity +'" class="form-control" disabled> </td> <td align="right">s/' + parseFloat(subtotal[cont]).toFixed(2) +'</td>' +
-                    '</tr>';
-        // var fila =
-        //     '<tr class="selected" id="fila' + cont + '">' +
-        //         '<td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar(' + cont + ')"><i class="fa fa-times"></i></button></td>' +
-        //         '<td><input type="hidden" name="client_id[]" value="' + client_id + '">' + producto + '</td>' +
-        //         '<td><input type="hidden" name="price[]" value="' + price + '">$' + price + '</td> <input class="form-control" type="number" id="price[]" value="' + price + '" disabled></td>' +
-        //         '<td><input type="hidden" name="quantity[]" value="' + quantity + '">' + quantity + '</td> <input class="form-control" type="number" id="quantity[]" value="' + quantity + '" disabled></td>' +
-        //         '<td align="right"> $' + subtotal[cont] + '</td>' +
-        //     '</tr>';
+        var fila =
+            '<tr class="selected" id="fila' + cont +'">' +
+                '<td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar(' + cont + ');"> ' + '<i class="fa fa-times fa-2x"></i></button></td>' +
+                '<td><input type="hidden" name="product_id[]" value="' + product_id + '">' + producto + '</td>' +
+                '<td> <input type="hidden" name="price[]" value="' + parseFloat(price).toFixed(2) + '"> <input class="form-control" type="number" value="' + parseFloat(price).toFixed(2) + '" disabled> </td> '+
+                '<td> <input type="hidden" name="discount[]" value="' + parseFloat(discount) + '"> <input class="form-control" type="number" value="' + parseFloat(discount) + '" disabled> </td>' +
+                '<td> <input type="hidden" name="quantity[]" value="' + quantity +'"> <input type="number" value="' + quantity +'" class="form-control" disabled> </td> <td align="right">s/' + parseFloat(subtotal[cont]).toFixed(2) +'</td>' +
+            '</tr>';
         cont++;
         limpiar();
         totales();

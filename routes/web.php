@@ -50,6 +50,9 @@ Route::get("change_status/products/{product}",[ProductController::class,"change_
 Route::get("change_status/purchases/{purchase}",[PurchaseController::class,"change_status"])->name("change.status.purchases");
 Route::get("change_status/sales/{sale}",[SaleController::class,"change_status"])->name("change.status.sales");
 
+Route::get("get_products_by_barcode",[ProductController::class,"get_products_by_barcode"])->name("get_products_by_barcode");
+Route::get("get_products_by_id",[ProductController::class,"get_products_by_id"])->name("get_products_by_id");
+
 Route::get("sales/reports_day",[SaleController::class,"reports_day"])->name("reports.day");
 Route::get("sales/reports_date",[SaleController::class,"reports_date"])->name("reports.date");
 

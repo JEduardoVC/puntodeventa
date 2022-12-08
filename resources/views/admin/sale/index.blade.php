@@ -77,7 +77,7 @@
                                             {{-- <button class="jsgrid-button js-grid-delete-button unstyled-button" title="Eliminar">
                                                 <i class="far fa-trash-alt"></i>
                                             </button> --}}
-                                            <a class="jsgrid-button js-grid-delete-button unstyled-button" title="Generar PDF"><i class="far fa-file-pdf"></i></a>
+                                            <a href="{{route("sales.pdf", $sale)}}" class="jsgrid-button js-grid-delete-button unstyled-button" title="Generar PDF"><i class="far fa-file-pdf"></i></a>
                                             <a class="jsgrid-button js-grid-delete-button unstyled-button" title="Imprimir"><i class="fas fa-print"></i></a>
                                             <a href="{{route("sales.show",$sale)}}" class="jsgrid-button js-grid-delete-button unstyled-button" title="Ver detalles"><i class="far fa-eye"></i></a>
                                     </td>

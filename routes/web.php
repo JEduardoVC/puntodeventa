@@ -44,6 +44,7 @@ Route::resource("bussinesses",BussinessController::class)->names("bussinesses")-
 Route::resource("printers",PrinterController::class)->names("printers")->only(["index","update"]);
 
 Route::get("purchases/pdf/{purchase}",[PurchaseController::class,"pdf"])->name("purchases.pdf");
+Route::get("sales/pdf/{sale}",[SaleController::class,"pdf"])->name("sales.pdf");
 
 Route::get("purchases/upload/{purchase}", [PurchaseController::class,"upload"])->name("upload.purchases");
 

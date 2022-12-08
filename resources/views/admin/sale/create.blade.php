@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tax">Ganancia: </label>
-                        <input type="number" name="tax" id="tax" class="form-control" placeholder="Impuesto al %18">
+                        <input type="number" name="tax" id="tax" class="form-control" placeholder="Impuesto al %18" required>
                     </div>
                     <div class="form-group">
                         <label for="stock">Stock Actual: </label>

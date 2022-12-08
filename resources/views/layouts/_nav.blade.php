@@ -16,7 +16,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index-2.html">
+        <a class="nav-link" href="{{route("dashboard")}}">
           <i class="fa fa-home menu-icon"></i>
           <span class="menu-title">Dashboard</span>
         </a>
@@ -36,9 +36,13 @@
         <div class="collapse" id="page-layouts">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("categories.index")}}">Categorias</a></li>
-            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("providers.index")}}">Proveedores</a></li>
-            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("products.index")}}">Productos</a></li>
             <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("clients.index")}}">Clientes</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("products.index")}}">Productos</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("providers.index")}}">Proveedores</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("purchases.index")}}">Compras</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("sales.index")}}">Ventas</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("bussinesses.index")}}">Empresas</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("printers.index")}}">Impresoras</a></li>
           </ul>
         </div>
       </li>

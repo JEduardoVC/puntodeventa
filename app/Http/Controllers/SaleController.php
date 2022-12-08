@@ -7,19 +7,33 @@ use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Requests\Sale\UpdateRequest;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Models\Client;
+use App\Models\Product;
+use App\Models\Provider;
 
 class SaleController extends Controller{
+
+    public function __construct() {
+        $this->middleware("auth");
+    }
+
     public function index() {
         $sales = Sale::get();
         return view("admin.Sale.index", compact("sales"));
     }
     public function create() {
+        $products = Product::get();
+        $providers = Provider::get();
         $clients = Client::get();
-        return view("admin.Sale.create", compact("clients"));
+        return view("admin.Sale.create", compact("clients", "products", "providers"));
     }
     public function store(StoreRequest $request) {
-        $sale = Sale::create($request->all());
+        $sale = Sale::create($request->all() + [
+            "user_id"=>Auth::user()->id,
+            "sale_date"=>Carbon::now("America/Mexico_City")
+        ]);
         foreach($request->product_id as $key => $product){
             $results[] = array("product_id"=>$request->product_id[$key], "quantity"=>$request->quantity[$key],"price"=>$request->price[$key],"discount"=>$request->discount[$key]);
         }

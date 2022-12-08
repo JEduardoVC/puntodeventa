@@ -1,5 +1,5 @@
 @extends("layouts.admin")
-@section("title","Detalles de compra")
+@section("title","Detalles de Ventas")
 @section("styles")
 @endsection
 @section("options")
@@ -9,12 +9,12 @@
 @section("content")
 <div class="content-wrapper">
     <div class="page-header">
-        <h3 class="page-title">Detalles de compra {{$purchase->id}}</h3>
+        <h3 class="page-title">Detalles de Venta {{$sale->id}}</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Panel Administrador</a></li>
-                <li class="breadcrumb-item"><a href="/products">Compra</a></li>
-                <li class="breadcrumb-item" aria-current="page">Detalles de compra {{$purchase->id}}</li>
+                <li class="breadcrumb-item"><a href="{{route("sales.index")}}">Ventas</a></li>
+                <li class="breadcrumb-item" aria-current="page">Detalles de Venta {{$sale->id}}</li>
             </ol>
         </nav>
     </div>
@@ -24,12 +24,16 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-6 text-center">
-                            <label class="form-control-label" for="ombre">Proveedor</label>
-                            <p>{{$purchase->provider->name}}</p>
+                            <label class="form-control-label" for="ombre">Cliente</label>
+                            <p>{{$sale->client->name}}</p>
                         </div>
                         <div class="col-md-6 text-center">
-                            <label class="form-control-label" for="ombre">Numero de compra</label>
-                            <p>{{$purchase->id}}</p>
+                            <label class="form-control-label" for="ombre">Vendedor</label>
+                            <p>{{$sale->user->name}}</p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label class="form-control-label" for="ombre">Numero de Venta</label>
+                            <p>{{$sale->id}}</p>
                         </div>
                     </div>
                     <br /><br />
@@ -41,6 +45,7 @@
                                     <tr>
                                         <th>Producto</th>
                                         <th>Precio(MXM)</th>
+                                        <th>Descuento(%)</th>
                                         <th>Cantidad</th>
                                         <th>Subtotal(MXM)</th>
                                     </tr>
@@ -48,18 +53,10 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="4">
-                                            <p align="right">Subtotal: </p>
+                                            <p align="right">Total del impuesto ({{$sale->tax}}%): </p>
                                         </th>
                                         <th>
-                                            <p align="right">{{number_format($subtotal,2)}}</p>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="4">
-                                            <p align="right">Total del impuesto ({{$purchase->tax}}%): </p>
-                                        </th>
-                                        <th>
-                                            <p align="right">{{number_format($subtotal*$purchase->tax/100,2)}}</p>
+                                            <p align="right">{{number_format($subtotal * $sale->tax / 100,2)}}</p>
                                         </th>
                                     </tr>
                                     <tr>
@@ -67,27 +64,27 @@
                                             <p align="right">Total a pagar: </p>
                                         </th>
                                         <th colspan="4">
-                                            <p align="right">{{number_format($purchase->total,2)}}</p>
+                                            <p align="right">{{number_format($sale->total,2)}}</p>
                                         </th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @foreach ($purchaseDetails as $purchaseDetail)
+                                    @foreach ($saleDetails as $saleDetail)
                                         <tr>
-                                            <td>{{$purchaseDetail->product->name}}</td>
-                                            <td>{{$purchaseDetail->price}}</td>
-                                            <td>{{$purchaseDetail->quantity}}</td>
-                                            <td>{{number_format($purchaseDetail->quantity*$purchaseDetail->price,2)}}</td>
+                                            <td>{{$saleDetail->product->name}}</td>
+                                            <td>{{$saleDetail->price}}</td>
+                                            <td>{{$saleDetail->discount}}</td>
+                                            <td>{{$saleDetail->quantity}}</td>
+                                            <td>{{number_format($saleDetail->quantity*$saleDetail->price,2)}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
                 </div>
                 <div class="card-footer text-muted">
-                    <a href="{{route("purchases.index")}}" class="btn btn-primary float-right">Volver</a>
+                    <a href="{{route("sales.index")}}" class="btn btn-primary float-right">Volver</a>
                 </div>
             </div>
         </div>

@@ -11,15 +11,24 @@ use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\PDF;
 use Carbon\Carbon;
 use App\Models\Client;
+use App\Models\Printer;
 use App\Models\Product;
 use App\Models\Provider;
 
 class SaleController extends Controller{
-
-    public function __construct() {
+    public function __construct(){
         $this->middleware("auth");
-    }
 
+        $this->middleware("can:sales.create")->only(["create","store"]);
+        $this->middleware("can:sales.index")->only(["index"]);
+        $this->middleware("can:sales.edit")->only(["edit","update"]);
+        $this->middleware("can:sales.show")->only(["show"]);
+        $this->middleware("can:sales.destroy")->only(["destroy"]);
+        $this->middleware("can:sales.pdf")->only(["pdf"]);
+        $this->middleware("can:change.status.sales")->only(["change_status"]);
+        $this->middleware("can:sales.print")->only(["print"]);
+
+    }
     public function index() {
         $sales = Sale::get();
         return view("admin.Sale.index", compact("sales"));
@@ -49,18 +58,6 @@ class SaleController extends Controller{
         }
         return view("admin.Sale.show", compact("sale", "saleDetails", "subtotal"));
     }
-    public function edit(Sale $sale) {
-        $client = Client::get();
-        return view("admin.Sale.show", compact("Sale"));
-    }
-    public function update(UpdateRequest $request, Sale $sale) {
-        //$sale->update($request->all());
-        //return redirect()->route("sales.index");
-    }
-    public function destroy(Sale $sale) {
-        //$sale->delete();
-        //return redirect()->route("sales.index");
-    }
     public function change_status(Sale $sale) {
         if($sale->status == "VALID"){
             $sale->update(["status"=>"CANCELED"]);
@@ -71,8 +68,7 @@ class SaleController extends Controller{
             return redirect()->back();
         }
     }
-    public function pdf(Sale $sale)
-    {
+    public function pdf(Sale $sale){
         $subtotal = 0 ;
         $saleDetails = $sale->saleDetails;
         foreach ($saleDetails as $saleDetail) {
@@ -80,5 +76,25 @@ class SaleController extends Controller{
         }
         $pdf = PDF::loadView('admin.sale.pdf', compact('sale', 'subtotal', 'saleDetails'));
         return $pdf->download('Reporte_de_venta_'.$sale->id.'.pdf');
+    }
+    public function print(Sale $sale){
+        try{
+            /*$subtotal = 0 ;
+            $saleDetails = $sale->saleDetails;
+            foreach ($saleDetails as $saleDetail) {
+                $subtotal += $saleDetail->quantity*$saleDetail->price-$saleDetail->quantity* $saleDetail->price*$saleDetail->discount/100;
+            }
+            $print_name = "TM20"; // Impresora
+            $connector = new WindowsPrintConnector($print_name);
+            $printer = new Printer($connector);
+
+            $printer->text("$80.00");
+            $printer->cut();
+            $printer->close();
+
+            return redirect()->back();*/
+        } catch(\Throwable $th){
+            return redirect()->back();
+        }
     }
 }

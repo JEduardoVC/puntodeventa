@@ -27,16 +27,8 @@
                             <div class="border-bottom text-center pb-4">
                                 <img src="{{asset('image/'.$product->image)}}" class="img-lg mb-3">
                                 <h3>{{$product->name}}</h3>
-                                <div class="d-flex justify-content-between">
-                                </div>
+                                <div class="d-flex justify-content-between"></div>
                             </div>
-                            {{-- <div class="border-bottom py-4">
-                                <div class="list-group">
-                                    <button type="button" class="list-group-item list-group-item-action active">Sobre Producto</button>
-                                    <button type="button" class="list-group-item list-group-item-action">Productos</button>
-                                    <button type="button" class="list-group-item list-group-item-action">Registrar productos</button>
-                                </div>
-                            </div> --}}
                             <div>
                                 <p class="clearfix">
                                     <span class="flaot-left">Estado</span>
@@ -60,6 +52,14 @@
                                         <a href="{{route("categories.show",$product->category->id)}}">
                                             {{$product->category->name}}
                                         </a>
+                                    </span>
+                                </p>
+                            </div>
+                            <div>
+                                <p class="clearfix">
+                                    <span class="flaot-left">Código de Barras</span>
+                                    <span class="float-right text-muted">
+                                        <a>{!! DNS1D::getBarcodeHTML($product->code, 'C128A'); !!}</a>
                                     </span>
                                 </p>
                             </div>

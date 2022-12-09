@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
-use App\Http\Requests\StoreSaleRequest;
-use App\Http\Requests\UpdateSaleRequest;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Requests\Sale\UpdateRequest;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +36,6 @@ class SaleController extends Controller{
         foreach($request->product_id as $key => $product){
             $results[] = array("product_id"=>$request->product_id[$key], "quantity"=>$request->quantity[$key],"price"=>$request->price[$key],"discount"=>$request->discount[$key]);
         }
-        echo $results;
         $sale->saleDetails()->createMany($results);
         return redirect()->route("sales.index");
     }

@@ -41,8 +41,6 @@
             <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("providers.index")}}">Proveedores</a></li>
             <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("purchases.index")}}">Compras</a></li>
             <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("sales.index")}}">Ventas</a></li>
-            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("bussinesses.index")}}">Empresas</a></li>
-            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route("printers.index")}}">Impresoras</a></li>
           </ul>
         </div>
       </li>

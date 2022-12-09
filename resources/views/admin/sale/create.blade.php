@@ -44,10 +44,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="code">Código de Barras: </label>
-                        <input type="number" name="code" id="code" class="form-control" placeholder="" required>
-                    </div>
-                    <div class="form-group">
                         <label for="tax">Ganancia: </label>
                         <input type="number" name="tax" id="tax" class="form-control" placeholder="Impuesto al %18" required>
                     </div>
